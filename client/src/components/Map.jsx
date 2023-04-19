@@ -13,7 +13,7 @@ export default function Map() {
   });
 
   return (
-    <section className="map-component">
+    <div className="map-component">
       <div id="map" className="map">
         <MapContainer center={position} zoom={14} scrollWheelZoom={true}>
           <TileLayer
@@ -27,6 +27,6 @@ export default function Map() {
           </Marker>
         </MapContainer>
       </div>
-    </section>
+    </div>
   );
 }

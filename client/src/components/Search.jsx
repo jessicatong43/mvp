@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 // require('dotenv').config();
 
@@ -41,3 +42,9 @@ export default function Search({ location, setLocation, setData }) {
     </div>
   );
 }
+
+Search.propTypes = {
+  location: PropTypes.string.isRequired,
+  setLocation: PropTypes.func.isRequired,
+  setData: PropTypes.func.isRequired,
+};

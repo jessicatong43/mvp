@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from '../../dist/assets/images/Logo.png';
 import Search from './Search';
 
@@ -10,3 +11,9 @@ export default function Header({ location, setLocation, setData }) {
     </div>
   );
 }
+
+Header.propTypes = {
+  location: PropTypes.string.isRequired,
+  setLocation: PropTypes.func.isRequired,
+  setData: PropTypes.func.isRequired,
+};

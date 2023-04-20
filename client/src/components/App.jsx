@@ -7,7 +7,7 @@ import FutureForecast from './FutureForecast';
 import sampleData from '../../../server/sampleData';
 
 export default function App() {
-  const [location, setLocation] = useState(94061);
+  const [location, setLocation] = useState('94061');
   const [data, setData] = useState(sampleData);
   const query = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=94061&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB';
 
@@ -18,6 +18,8 @@ export default function App() {
         const getData = {
           [location]: resData.data.locations[location].values,
           moonData: resData.data.locations[location].currentConditions.moonphase,
+          sunset: resData.data.locations[location].currentConditions.sunrise,
+          sunrise: resData.data.locations[location].currentConditions.sunset,
         };
         console.log('initial getData: ', getData);
         setData(getData);
@@ -33,7 +35,7 @@ export default function App() {
       <div id="content">
         <div id="topRow">
           <h1>Today</h1>
-          <Today className="widget" />
+          <Today className="widget" data={data} location={location} />
           <Map className="widget" />
         </div>
         <div id="bottomRow">

@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import IMAGES from '../../dist/assets/images/index';
 
 function ForecastDay({ dayData, moonData }) {
+  console.log('moonData: ', moonData);
   const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
   const date = (new Date(dayData.datetime)).toLocaleDateString('en-US', dateOptions);
   let score = 0;
@@ -125,7 +127,10 @@ function ForecastDay({ dayData, moonData }) {
       <small className="date">{date}</small>
       <div className="qualityAndTemp">
         <h2>{condition}</h2>
-        <h3>{Math.floor(dayData.temp)}°F</h3>
+        <h3>
+          {Math.floor(dayData.temp)}
+          °F
+        </h3>
       </div>
       <div className="futureStats">
         <img alt={cloudCover} className="forecastWeatherIcon" src={cloudCoverIcon} />
@@ -133,10 +138,20 @@ function ForecastDay({ dayData, moonData }) {
         <img alt={moonPhase} className="forecastWeatherIcon" src={moonIcon} />
         <p>{moonPhase}</p>
         <img alt="Wind" className="forecastWeatherIcon" src={IMAGES.windIcon} />
-        <p>{windDir} {Math.round(dayData.wspd)}</p>
+        <p>
+          {windDir}
+          &nbsp;&nbsp;&nbsp;
+          {Math.round(dayData.wspd)}
+          mph
+        </p>
       </div>
     </div>
   );
 }
 
 export default ForecastDay;
+
+ForecastDay.propTypes = {
+  dayData: PropTypes.shape.isRequired,
+  moonData: PropTypes.number.isRequired,
+};

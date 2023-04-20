@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ForecastDay from './ForecastDay';
 
 function FutureForecast({ data, location }) {
@@ -14,3 +15,8 @@ function FutureForecast({ data, location }) {
 }
 
 export default FutureForecast;
+
+FutureForecast.propTypes = {
+  data: PropTypes.shape.isRequired,
+  location: PropTypes.string.isRequired,
+};

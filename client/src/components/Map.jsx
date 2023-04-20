@@ -7,7 +7,7 @@ export default function Map() {
   const position = [37.78, -122.39];
 
   const customIcon = new Icon({
-    iconUrl: '/assets/MapIcon.png',
+    iconUrl: '/assets/images/MapIcon.png',
     iconSize: [50, 50],
     iconAnchor: [25, 45],
   });

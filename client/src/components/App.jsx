@@ -7,28 +7,29 @@ import FutureForecast from './FutureForecast';
 import sampleData from '../../../server/sampleData';
 
 export default function App() {
-  const [location, setLocation] = useState('94061');
+  const [location, setLocation] = useState(94061);
   const [data, setData] = useState(sampleData);
-  const query = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=94061&aggregateHours=24&forecastDays=4&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB';
+  const query = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=94061&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB';
 
   useEffect(() => {
     axios.get(query)
       .then((resData) => {
-        const forecastData = {
-          [location]: resData.data.locations[location].values.slice(1),
-          moonphase: resData.data.locations[location].currentConditions.moonphase,
+        console.log('resData: ', resData.data.locations);
+        const getData = {
+          [location]: resData.data.locations[location].values,
+          moonData: resData.data.locations[location].currentConditions.moonphase,
         };
-        console.log('forecastData: ', forecastData);
-        setData(forecastData);
+        console.log('initial getData: ', getData);
+        setData(getData);
       })
       .catch((err) => {
         throw new Error(err);
       });
-  }, [location]);
+  }, []);
 
   return (
     <div id="App">
-      <Header location={location} setLocation={setLocation} />
+      <Header location={location} setLocation={setLocation} setData={setData} />
       <div id="content">
         <div id="topRow">
           <h1>Today</h1>

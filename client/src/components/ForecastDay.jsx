@@ -1,84 +1,140 @@
 import React from 'react';
+import IMAGES from '../../dist/assets/images/index';
 
-function ForecastDay({ dayData, moonphase }) {
+function ForecastDay({ dayData, moonData }) {
   const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
   const date = (new Date(dayData.datetime)).toLocaleDateString('en-US', dateOptions);
   let score = 0;
 
-  switch (true) {
-    case (dayData.cloudcover < 20):
-      score += 3;
-      break;
-    case (dayData.cloudcover < 40):
-      score += 2;
-      break;
-    case (dayData.cloudcover < 60):
-      score += 1;
-      break;
-    default:
-      break;
+  // Cloud cover
+  let cloudCover = 'Cloudy';
+  let cloudCoverIcon = IMAGES.cloudyIcon;
+  if (dayData.cloudcover <= 20) {
+    score += 3;
+    cloudCover = 'Clear skies';
+    cloudCoverIcon = IMAGES.clearSkyIcon;
+  } else if (dayData.cloudcover <= 40) {
+    score += 2;
+    cloudCover = 'Partly cloudy';
+    cloudCoverIcon = IMAGES.partlyCloudyIcon;
+  } else if (dayData.cloudcover <= 60) {
+    score += 1;
   }
-  switch (true) {
-    case (dayData.humidity < 45):
-      score += 3;
-      break;
-    case (dayData.humidity < 55):
-      score += 2;
-      break;
-    case (dayData.humidity < 65):
-      score += 1;
-      break;
-    default:
-      break;
+
+  // Humdity
+  if (dayData.humidity <= 45) {
+    score += 3;
+  } else if (dayData.humidity <= 55) {
+    score += 2;
+  } else if (dayData.humidity <= 65) {
+    score += 1;
   }
-  switch (true) {
-    case (dayData.visibility > 9):
-      score += 3;
-      break;
-    case (dayData.visibility > 7):
-      score += 2;
-      break;
-    case (dayData.visibility > 5):
-      score += 1;
-      break;
-    default:
-      break;
+
+  // Visibility
+  if (dayData.visibility >= 9) {
+    score += 3;
+  } else if (dayData.visibility >= 7) {
+    score += 2;
+  } else if (dayData.visibility >= 5) {
+    score += 1;
   }
-  switch (true) {
-    case (dayData.moonphase < 0.14 || dayData.moonphase > 0.88):
-      score += 3;
-      break;
-    case (dayData.moonphase < 0.28 || dayData.moonphase > 0.73):
-      score += 2;
-      break;
-    case (dayData.moonphase < 0.42 || dayData.moonphase > 0.57):
-      score += 1;
-      break;
-    default:
-      break;
+
+  // Moon Phase
+  let moonPhase = 'Full moon';
+  let moonIcon = IMAGES.fullMoonIcon;
+  if (moonData === 0) {
+    score += 3;
+    moonPhase = 'New moon';
+    moonIcon = IMAGES.newMoonIcon;
+  } else if (moonData <= 0.14) {
+    score += 3;
+    moonPhase = 'Waxing crescent';
+    moonIcon = IMAGES.waxingCrescentIcon;
+  } else if (moonData >= 0.88) {
+    score += 3;
+    moonPhase = 'Waning crescent';
+    moonIcon = IMAGES.waningCrescentIcon;
+  } else if (moonData <= 0.28) {
+    score += 2;
+    moonPhase = 'First quarter';
+    moonIcon = IMAGES.firstQuarterIcon;
+  } else if (moonData >= 0.73) {
+    score += 2;
+    moonPhase = 'Third quarter';
+    moonIcon = IMAGES.thirdQuarterIcon;
+  } else if (moonData <= 0.42) {
+    score += 1;
+    moonPhase = 'Waxing gibbous';
+    moonIcon = IMAGES.waxingGibbousIcon;
+  } else if (moonData >= 0.57) {
+    score += 1;
+    moonPhase = 'Waning gibbous';
+    moonIcon = IMAGES.waningGibbousIcon;
+  }
+
+  // Average score
+  let condition = 'N/A';
+  if ((score / 4) >= 2.5) {
+    condition = 'Great';
+  } else if ((score / 4) >= 1.75) {
+    condition = 'Good';
+  } else if ((score / 4) >= 1) {
+    condition = 'Fair';
+  } else {
+    condition = 'Poor';
+  }
+
+  // Wind
+  let windDir = 'NNW';
+  if (dayData.wdir < 11.3 || dayData.wdir >= 348.8) {
+    windDir = 'N';
+  } else if (dayData.wdir < 33.8) {
+    windDir = 'NNE';
+  } else if (dayData.wdir < 56.3) {
+    windDir = 'NE';
+  } else if (dayData.wdir < 78.8) {
+    windDir = 'ENE';
+  } else if (dayData.wdir < 101.3) {
+    windDir = 'E';
+  } else if (dayData.wdir < 123.8) {
+    windDir = 'ESE';
+  } else if (dayData.wdir < 146.3) {
+    windDir = 'SE';
+  } else if (dayData.wdir < 168.8) {
+    windDir = 'SSE';
+  } else if (dayData.wdir < 191.3) {
+    windDir = 'S';
+  } else if (dayData.wdir < 213.8) {
+    windDir = 'SSW';
+  } else if (dayData.wdir < 236.3) {
+    windDir = 'SW';
+  } else if (dayData.wdir < 258.8) {
+    windDir = 'WSW';
+  } else if (dayData.wdir < 281.3) {
+    windDir = 'W';
+  } else if (dayData.wdir < 303.8) {
+    windDir = 'WNW';
+  } else if (dayData.wdir < 326.3) {
+    windDir = 'NW';
+  } else if (dayData.wdir < 348.8) {
+    windDir = 'NNW';
   }
 
   return (
     <div className="forecastWidget">
-      <small>{date}</small>
-      <div>
-        <h2>Great</h2>
-        <h3>53°F</h3>
+      <small className="date">{date}</small>
+      <div className="qualityAndTemp">
+        <h2>{condition}</h2>
+        <h3>{Math.floor(dayData.temp)}°F</h3>
       </div>
-      {/* <div className="stats">
-        <img alt="Clear Sky" className="weatherIcon" src={clearSkyIcon} />
-        <p>Clear skies</p>
-        <img alt="Wind" className="weatherIcon" src={windIcon} />
-        <p>ENE 9mph</p>
-        <img alt="Sunset" className="weatherIcon" src={sunsetIcon} />
-        <p>7:46PM</p>
-        <img alt="Waxing cresent" className="weatherIcon" src={waxingCrescentIcon} />
-        <p>Waxing crescent</p>
-        <img alt="Humidity" className="weatherIcon" src={humidityIcon} />
-        <p>76%</p>
-        <img alt="Sunrise" className="weatherIcon" src={sunriseIcon} />
-        <p>6:30AM</p>
-      </div> */}
+      <div className="futureStats">
+        <img alt={cloudCover} className="forecastWeatherIcon" src={cloudCoverIcon} />
+        <p>{cloudCover}</p>
+        <img alt={moonPhase} className="forecastWeatherIcon" src={moonIcon} />
+        <p>{moonPhase}</p>
+        <img alt="Wind" className="forecastWeatherIcon" src={IMAGES.windIcon} />
+        <p>{windDir} {Math.round(dayData.wspd)}</p>
+      </div>
     </div>
   );
 }

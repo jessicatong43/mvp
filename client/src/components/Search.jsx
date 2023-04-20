@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 // require('dotenv').config();
 
-export default function Search({ location, setLocation }) {
+export default function Search({ location, setLocation, setData }) {
+  const [tempLocation, setTempLocation] = useState(location);
+
   const changeHandler = (e) => {
     e.preventDefault();
-    setLocation(e.target.value);
-    console.log('location: ', location);
+    setTempLocation(e.target.value);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(location);
-    const query = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=${location}&aggregateHours=24&forecastDays=4&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB`;
+
+    setLocation(tempLocation);
+
+    const query = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=${tempLocation}&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB`;
 
     axios.get(query)
-      .then((data) => {
-        console.log('data: ', {
-          [location]: data.data.locations[location].values,
-        });
+      .then((resData) => {
+        const newGetData = {
+          [tempLocation]: resData.data.locations[tempLocation].values,
+          moonData: resData.data.locations[tempLocation].currentConditions.moonphase,
+        };
+        console.log('newGetData: ', newGetData);
+        setData(newGetData);
       })
       .catch((err) => {
         throw new Error(err);

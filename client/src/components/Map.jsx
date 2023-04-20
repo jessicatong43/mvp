@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
@@ -7,8 +7,9 @@ import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css';
 
 export default function Map({ data }) {
-  const position = [37.7876511, -122.3966700];
-  // const position = [data.latitude, data.longitude];
+  const mapRef = useRef();
+  // const position = [37.7876511, -122.3966700];
+  const position = [data.latitude, data.longitude];
 
   const customIcon = new Icon({
     iconUrl: '/assets/images/MapIcon.png',
@@ -19,7 +20,7 @@ export default function Map({ data }) {
   return (
     <div className="map-component">
       <div id="map" className="map">
-        <MapContainer center={position} zoom={18} scrollWheelZoom>
+        <MapContainer ref={mapRef} center={position} zoom={18} scrollWheelZoom>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

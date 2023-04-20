@@ -22,27 +22,32 @@ Once the project moves into development, the press release can be used as a touc
 
 <!-- ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title. -->
-An easy way to check star-gazing conditions in your area.
+Pure Skies provides an easy way to see upcoming star-gazing conditions in your area.
 
 <!-- ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good. -->
-This app uses the most common factors to determine the star-gazing conditions in your area. It takes into consideration cloud cover, wind, humidity, and phases of the moon.
+This app uses the most common factors to determine the star-gazing conditions in your area. It takes into consideration cloud cover, visibility, humidity, and phases of the moon.
 
 <!-- ## Problem ##
   > Describe the problem your product solves. -->
-Most star-gazing sites give you data to sort through yourself to determine whether conditions are good. This app compiles that information and displays it clearly for you to see
+Most star-gazing sites give you data to sort through yourself to determine whether conditions are good. It often takes upwards of 5 minutes to come to a reasonable conclusion, which is not ideal if you're trying to catch some last minute meteors.
 
 <!-- ## Solution ##
   > Describe how your product elegantly solves the problem. -->
+Pure Skies compiles that data for you and displays it in an easy-to-digest manner.
 
 <!-- ## Quote from You ##
   > A quote from a spokesperson in your company. -->
+As someone who enjoys a nice night of stargazing, I've done my fair share of data parsing when researching sky conditions for a given night. Most sites give you hard-to-read data that takes minutes to read. We wanted to create something that tells someone at a glance whether they'd get to see the Big Dipper tonight.
 
 <!-- ## How to Get Started ##
   > Describe how easy it is to get started. -->
+Simply enter the address or zipcode of the area you'd like to visit into the search bar at the top to see today's conditions as well as a 4-day forecast.
 
 <!-- ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit. -->
+Not only is this site easy to read and use, it looks great too!
 
 <!-- ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next. -->
+Next time you make stargazing plans, be sure to check out Pure Skies at [www.pure-skies.com](http://localhost:3000/)!

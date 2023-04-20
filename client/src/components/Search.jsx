@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -6,6 +6,15 @@ import PropTypes from 'prop-types';
 
 export default function Search({ location, setLocation, setData }) {
   const [tempLocation, setTempLocation] = useState(location);
+
+  // function handleOnFlyTo() {
+  //   const { current = {} } = mapRef;
+  //   const { leafletElement: map } = current;
+
+  //   map.flyTo(position, 18, {
+  //     duration: 2,
+  //   });
+  // }
 
   const changeHandler = (e) => {
     e.preventDefault();

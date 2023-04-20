@@ -9,7 +9,8 @@ import sampleData from '../../../server/sampleData';
 export default function App() {
   const [location, setLocation] = useState('94061');
   const [data, setData] = useState(sampleData);
-  const query = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=94061&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB';
+  // const [mapPosition, setMapPosition] = useState([37.7876511, -122.3966700]);
+  const query = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=37.7876511, -122.3966700&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB';
 
   useEffect(() => {
     axios.get(query)

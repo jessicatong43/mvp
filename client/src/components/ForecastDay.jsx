@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import IMAGES from '../../dist/assets/images/index';
 
 function ForecastDay({ dayData, moonData }) {
-  console.log('moonData: ', moonData);
   const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
   const date = (new Date(dayData.datetime)).toLocaleDateString('en-US', dateOptions);
   let score = 0;

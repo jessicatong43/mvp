@@ -14,14 +14,14 @@ export default function App() {
   useEffect(() => {
     axios.get(query)
       .then((resData) => {
-        console.log('resData: ', resData.data.locations);
         const getData = {
           [location]: resData.data.locations[location].values,
           moonData: resData.data.locations[location].currentConditions.moonphase,
-          sunset: resData.data.locations[location].currentConditions.sunrise,
-          sunrise: resData.data.locations[location].currentConditions.sunset,
+          sunset: resData.data.locations[location].currentConditions.sunset,
+          sunrise: resData.data.locations[location].currentConditions.sunrise,
+          latitude: resData.data.locations[location].latitude,
+          longitude: resData.data.locations[location].longitude,
         };
-        console.log('initial getData: ', getData);
         setData(getData);
       })
       .catch((err) => {
@@ -36,7 +36,7 @@ export default function App() {
         <div id="topRow">
           <h1>Today</h1>
           <Today className="widget" data={data} location={location} />
-          <Map className="widget" />
+          <Map className="widget" data={data} />
         </div>
         <div id="bottomRow">
           <h1>4-Day Forecast</h1>

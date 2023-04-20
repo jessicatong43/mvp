@@ -15,8 +15,6 @@ export default function Search({ location, setLocation, setData }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    setLocation(tempLocation);
-
     const query = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=${tempLocation}&aggregateHours=24&forecastDays=5&unitGroup=us&shortColumnNames=true&contentType=json&key=AEUZHSGZPPNFPVKQJ76RUXNSB`;
 
     axios.get(query)
@@ -24,9 +22,15 @@ export default function Search({ location, setLocation, setData }) {
         const newGetData = {
           [tempLocation]: resData.data.locations[tempLocation].values,
           moonData: resData.data.locations[tempLocation].currentConditions.moonphase,
+          sunset: resData.data.locations[tempLocation].currentConditions.sunset,
+          sunrise: resData.data.locations[tempLocation].currentConditions.sunrise,
+          latitude: resData.data.locations[tempLocation].latitude,
+          longitude: resData.data.locations[tempLocation].longitude,
         };
         console.log('newGetData: ', newGetData);
+        setLocation(tempLocation);
         setData(newGetData);
+        e.target.reset();
       })
       .catch((err) => {
         throw new Error(err);

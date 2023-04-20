@@ -3,10 +3,12 @@ import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
 import { Icon } from 'leaflet';
+import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css';
 
-export default function Map() {
+export default function Map({ data }) {
   const position = [37.7876511, -122.3966700];
+  // const position = [data.latitude, data.longitude];
 
   const customIcon = new Icon({
     iconUrl: '/assets/images/MapIcon.png',
@@ -32,3 +34,7 @@ export default function Map() {
     </div>
   );
 }
+
+Map.propTypes = {
+  data: PropTypes.shape.isRequired,
+};

@@ -526,6 +526,10 @@ const sampleData = {
     },
   ],
   moonphase: 0.0,
+  sunrise: '2023-04-19T06:28:49-07:00',
+  sunset: '2023-04-19T19:47:57-07:00',
+  latitude: 37.7876511,
+  longitude: -122.3966700,
 };
 
 export default sampleData;

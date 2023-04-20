@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import IMAGES from '../../dist/assets/images/index';
 
 function Today({ data, location }) {
+  console.log('Today data: ', data);
+  console.log('Today location: ', location);
   const todayData = data[location][0];
   const { moonData } = data;
   let score = 0;

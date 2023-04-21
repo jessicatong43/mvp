@@ -35,7 +35,14 @@ export default function App() {
       <Header location={location} setLocation={setLocation} setData={setData} />
       <div id="content">
         <div id="topRow">
-          <h1>Today</h1>
+          <h1>
+            Today&nbsp;
+            <span>
+              (
+              {location}
+              )
+            </span>
+          </h1>
           <Today className="widget" data={data} location={location} />
           <Map className="widget" data={data} />
         </div>

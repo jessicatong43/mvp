@@ -23,15 +23,18 @@ function Today({ data, location }) {
   // Cloud cover
   let cloudCover = 'Cloudy';
   let cloudCoverIcon = IMAGES.cloudyIcon;
+  let coverClass = 'cloudy';
   if (todayData.cloudcover <= 20) {
-    score += 3;
+    score += 4.5;
     cloudCover = 'Clear skies';
     cloudCoverIcon = IMAGES.clearSkyIcon;
-  } else if (todayData.cloudcover <= 40) {
-    score += 2;
+    coverClass = 'clear';
+  } else if (todayData.cloudcover <= 35) {
+    score += 2.5;
     cloudCover = 'Partly cloudy';
     cloudCoverIcon = IMAGES.partlyCloudyIcon;
-  } else if (todayData.cloudcover <= 60) {
+    coverClass = 'partlyCloudy';
+  } else if (todayData.cloudcover <= 50) {
     score += 1;
   }
 
@@ -39,17 +42,13 @@ function Today({ data, location }) {
   if (todayData.humidity <= 45) {
     score += 3;
   } else if (todayData.humidity <= 55) {
-    score += 2;
-  } else if (todayData.humidity <= 65) {
-    score += 1;
+    score += 1.5;
   }
 
   // Visibility
-  if (todayData.visibility >= 9) {
-    score += 3;
-  } else if (todayData.visibility >= 7) {
+  if (todayData.visibility >= 8) {
     score += 2;
-  } else if (todayData.visibility >= 5) {
+  } else if (todayData.visibility >= 6) {
     score += 1;
   }
 
@@ -77,11 +76,11 @@ function Today({ data, location }) {
     moonPhase = 'Third quarter';
     moonIcon = IMAGES.thirdQuarterIcon;
   } else if (moonData <= 0.42) {
-    score += 1;
+    score += 0.5;
     moonPhase = 'Waxing gibbous';
     moonIcon = IMAGES.waxingGibbousIcon;
   } else if (moonData >= 0.57) {
-    score += 1;
+    score += 0.5;
     moonPhase = 'Waning gibbous';
     moonIcon = IMAGES.waningGibbousIcon;
   }
@@ -135,7 +134,7 @@ function Today({ data, location }) {
   }
 
   return (
-    <div id="todayWidget">
+    <div className={`todayWidget ${coverClass}`}>
       <div className="qualityAndTemp">
         <h2>{condition}</h2>
         <h3>

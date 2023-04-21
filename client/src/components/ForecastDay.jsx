@@ -10,15 +10,18 @@ function ForecastDay({ dayData, moonData }) {
   // Cloud cover
   let cloudCover = 'Cloudy';
   let cloudCoverIcon = IMAGES.cloudyIcon;
+  let coverClass = 'cloudy';
   if (dayData.cloudcover <= 20) {
-    score += 3;
+    score += 4;
     cloudCover = 'Clear skies';
     cloudCoverIcon = IMAGES.clearSkyIcon;
-  } else if (dayData.cloudcover <= 40) {
-    score += 2;
+    coverClass = 'clear';
+  } else if (dayData.cloudcover <= 35) {
+    score += 2.5;
     cloudCover = 'Partly cloudy';
     cloudCoverIcon = IMAGES.partlyCloudyIcon;
-  } else if (dayData.cloudcover <= 60) {
+    coverClass = 'partlyCloudy';
+  } else if (dayData.cloudcover <= 50) {
     score += 1;
   }
 
@@ -26,17 +29,13 @@ function ForecastDay({ dayData, moonData }) {
   if (dayData.humidity <= 45) {
     score += 3;
   } else if (dayData.humidity <= 55) {
-    score += 2;
-  } else if (dayData.humidity <= 65) {
-    score += 1;
+    score += 1.5;
   }
 
   // Visibility
-  if (dayData.visibility >= 9) {
-    score += 3;
-  } else if (dayData.visibility >= 7) {
+  if (dayData.visibility >= 8) {
     score += 2;
-  } else if (dayData.visibility >= 5) {
+  } else if (dayData.visibility >= 6) {
     score += 1;
   }
 
@@ -64,11 +63,11 @@ function ForecastDay({ dayData, moonData }) {
     moonPhase = 'Third quarter';
     moonIcon = IMAGES.thirdQuarterIcon;
   } else if (moonData <= 0.42) {
-    score += 1;
+    score += 0.5;
     moonPhase = 'Waxing gibbous';
     moonIcon = IMAGES.waxingGibbousIcon;
   } else if (moonData >= 0.57) {
-    score += 1;
+    score += 0.5;
     moonPhase = 'Waning gibbous';
     moonIcon = IMAGES.waningGibbousIcon;
   }
@@ -77,7 +76,7 @@ function ForecastDay({ dayData, moonData }) {
   let condition = 'N/A';
   if ((score / 4) >= 2.5) {
     condition = 'Great';
-  } else if ((score / 4) >= 1.75) {
+  } else if ((score / 4) >= 1.5) {
     condition = 'Good';
   } else if ((score / 4) >= 1) {
     condition = 'Fair';
@@ -122,7 +121,7 @@ function ForecastDay({ dayData, moonData }) {
   }
 
   return (
-    <div className="forecastWidget">
+    <div className={`forecastWidget ${coverClass}`}>
       <small className="date">{date}</small>
       <div className="qualityAndTemp">
         <h2>{condition}</h2>
